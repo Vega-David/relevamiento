@@ -97,11 +97,32 @@ enviarBtn.addEventListener('click', async () => {
     alert('Agregue al menos un elemento antes de enviar.');
     return;
   }
-  // Debug: mostrar el valor de nombre_servicio antes de enviar
-  console.log('Valor de nombre_servicio:', usuario.nombre_servicio);
-  if (!usuario.nombre_servicio) {
-    alert('Error: El nombre del servicio no se está enviando. Valor actual: ' + usuario.nombre_servicio);
-    return;
+  // Generar PDF antes de enviar
+  if (window.jspdf && window.jspdf.jsPDF) {
+    const doc = new window.jspdf.jsPDF();
+    // Título
+    const titulo = `reporte_cuadrilla_${usuario.cuadrilla}`;
+    doc.setFontSize(18);
+    doc.text(titulo, 105, 18, { align: 'center' });
+    // Tabla de elementos
+    const headers = [["Nombre", "Característica", "Código único", "Estado"]];
+    const data = elementos.map(el => [el.nombre_elemento, el.caracteristica, el.codigo_unico, el.estado]);
+    doc.autoTable({
+      head: headers,
+      body: data,
+      startY: 28,
+      theme: 'grid',
+      headStyles: { fillColor: [25, 118, 210] },
+      styles: { fontSize: 11 }
+    });
+    // Datos del usuario debajo de la tabla
+    let finalY = doc.lastAutoTable ? doc.lastAutoTable.finalY + 10 : 38 + data.length * 10;
+    doc.setFontSize(13);
+    doc.text(`Nombre: ${usuario.nombre}`, 14, finalY);
+    doc.text(`Documento: ${usuario.documento}`, 14, finalY + 8);
+    doc.text(`Email: ${usuario.email}`, 14, finalY + 16);
+    // Guardar PDF
+    doc.save(`reporte_cuadrilla_${usuario.cuadrilla}.pdf`);
   }
   // Enviar datos al servidor (Google Apps Script)
   try {
