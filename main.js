@@ -104,11 +104,13 @@ enviarBtn.addEventListener('click', async () => {
     alert('Agregue al menos un elemento antes de enviar.');
     return;
   }
+  // Log para depuración: mostrar el nombre del servicio seleccionado y su tipo
+  console.log('Nombre del servicio seleccionado:', usuario.nombre_servicio, 'Tipo:', typeof usuario.nombre_servicio);
   // Generar PDF antes de enviar
   if (window.jspdf && window.jspdf.jsPDF) {
     const doc = new window.jspdf.jsPDF();
     // Título
-    const titulo = `reporte_cuadrilla_${usuario.cuadrilla}`;
+    const titulo = `Reporte Cuadrilla ${usuario.cuadrilla}`;
     doc.setFontSize(18);
     doc.text(titulo, 105, 18, { align: 'center' });
     // Tabla de elementos
