@@ -60,6 +60,13 @@ usuarioForm.addEventListener('submit', e => {
   // Oculta el div completo del formulario de usuario y muestra el de elementos
   if (formularioUsuario) formularioUsuario.style.display = 'none';
   formularioElementos.style.display = 'block';
+  const tablaPanel = document.getElementById('tabla-elementos-panel');
+  if (tablaPanel) tablaPanel.style.display = 'flex';
+  // Asegura que el formulario de elementos no esté en posición absoluta ni tape la tabla
+  formularioElementos.style.position = '';
+  formularioElementos.style.left = '';
+  formularioElementos.style.top = '';
+  formularioElementos.style.width = '';
 });
 
 // Paso 2: Elementos
@@ -165,8 +172,8 @@ function renderTabla() {
       <td>${el.codigo_unico}</td>
       <td>${el.estado}</td>
       <td>
-        <button type="button" onclick="editarElemento(${idx})">Editar</button>
-        <button type="button" onclick="eliminarElemento(${idx})">Eliminar</button>
+        <button type="button" class="tabla-btn btn-editar" onclick="editarElemento(${idx})"><span class="icono-editar" aria-hidden="true">✏️</span> Editar</button>
+        <button type="button" class="tabla-btn btn-eliminar" onclick="eliminarElemento(${idx})"><span class="icono-eliminar" aria-hidden="true">🗑️</span> Eliminar</button>
       </td>
     `;
     tablaElementos.appendChild(row);
