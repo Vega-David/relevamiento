@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Registro de Elementos - Cuadrillas</title>
+  <script type="module" src="main.js"></script>
+</head>
+<body>
+  <h1>Registro de Elementos - Cuadrillas</h1>
+  <div id="formulario-usuario">
+    <h2>Datos del Usuario</h2>
+    <form id="usuario-form">
+      <label for="nombre">Nombre y Apellido:</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre y apellido" required><br>
+      <label for="documento">Documento:</label>
+      <input type="text" id="documento" name="documento" placeholder="Ingrese su documento" required><br>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Ingrese su email" required><br>
+      <label for="servicio">Servicio:</label>
+      <select id="servicio" name="servicio" required></select><br>
+      <label for="cuadrilla">Cuadrilla:</label>
+      <select id="cuadrilla" name="cuadrilla" required></select><br>
+      <button type="submit">Siguiente</button>
+    </form>
+  </div>
+
+  <div id="formulario-elementos" style="display:none;">
+    <h2>Elementos</h2>
+    <form id="elemento-form">
+      <label for="nombre_elemento">Nombre del elemento:</label>
+      <input type="text" id="nombre_elemento" name="nombre_elemento" placeholder="Nombre del elemento" required><br>
+      <label for="caracteristica">Característica:</label>
+      <input type="text" id="caracteristica" name="caracteristica" placeholder="Característica" required><br>
+      <label for="codigo_unico">Código único:</label>
+      <input type="text" id="codigo_unico" name="codigo_unico" placeholder="Código alfanumérico" required><br>
+      <label for="estado">Estado:</label>
+      <select id="estado" name="estado" required>
+        <option value="Correcto">Correcto</option>
+        <option value="Desgastado/Roto">Desgastado/Roto</option>
+      </select><br>
+      <button type="submit" id="guardar-btn">Guardar</button>
+      <button type="button" id="enviar-btn">Enviar</button>
+    </form>
+    <h3>Lista de Elementos</h3>
+    <table id="tabla-elementos" border="1">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Característica</th>
+          <th>Código único</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</body>
+</html>
